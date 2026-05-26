@@ -1,48 +1,41 @@
-@extends('admin.mainsidebar');
+@extends('admin.mainsidebar')
 @section('adminbanner')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-         <div class="container">
-            <div class="style">
-             <div class="row">
-                <div class="col-md-12 text-center">
-                    @if (session('success'))
-                        <div class="alert alert-success" role="alert">
-  {{session('success')}}
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                @if (session('success'))
+                    <div class="alert alert-success" role="alert">
+                        {{session('success')}}
 </div>
-                    @endif
-                    <table class="table text-center">
+                @endif
+                @if (session('alert'))
+                    <div class="alert alert-danger" role="alert">
+                        {{session('alert')}}
+</div>
+                @endif
+                <table class="table">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Mail</th>
+                        <th>Password</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                    @foreach ($data as $data)
                         <tr>
-                            <th>ID</th> 
-                            <th>Name</th>
-                            <th>Mail</th>
-                            <th>Role</th>
-                            <th>Action</th>
+                            <td>{{$data->id}}</td>
+                            <td>{{$data->name}}</td>
+                            <td>{{$data->mail}}</td>
+                            <td>{{$data->password}}</td>
+                            <td>{{$data->role}}</td>
+                            <td>
+                                <a class="btn btn-success" href="{{route('useredit', $data->id)}}"><i class="fa-solid fa-pen-to-square text-light"></i></a><a class="btn btn-danger" href="{{route('userdel',$data->id)}}"><i class="fa-solid fa-trash text-light"></i></a>
+                            </td>
                         </tr>
-                        @foreach ($data as $result )
-                            <tr>
-                                <td>{{$result->id}}</td>
-                                <td>{{$result->name}}</td>
-                                <td>{{$result->mail}}</td>
-                                <td>{{$result->role}}</td>
-                                <td><a href=""><i class="fa-solid fa-pen-to-square text-success"></i></a>||<a href="{{route('userdel',$result->id)}}"><i class="fa-solid fa-trash text-danger"></i></a></td>
-                                
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
-                
-            </div>
+                    @endforeach
+                </table>
             </div>
         </div>
-</body>
-</html>
+    </div>
 @endsection
-
-

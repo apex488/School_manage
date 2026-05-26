@@ -83,3 +83,19 @@
     });
 
 })(jQuery);
+
+let questions = document.querySelectorAll(".faq-question");
+
+questions.forEach(function(q){
+q.addEventListener("click", function(){
+
+let answer = this.nextElementSibling;
+
+if(answer.style.display === "block"){
+answer.style.display = "none";
+}else{
+answer.style.display = "block";
+}
+
+});
+});

@@ -1,6 +1,5 @@
 @extends('admin.mainsidebar')
 @section('adminbanner')
-
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
@@ -32,7 +31,7 @@
                                 <td><img src="{{url('storage/course/'.$data->pic)}}" alt="" width="100px" height="100px"></td>
                                 <td>{{$data->desc}}</td>
                                 <td>
-                                    <a href="{{route('editcourse', $data->id)}}"><i class="fa-solid fa-pen-to-square text-success"></i></a>||<a href="{{route('coursedel',$data->id)}}"><i class="fa-solid fa-trash text-danger"></i></a>
+                                    <a class="btn btn-success" href="{{route('editcourse', $data->id)}}"><i class="fa-solid fa-pen-to-square text-light"></i></a><a class="btn btn-danger" href="{{route('coursedel',$data->id)}}"><i class="fa-solid fa-trash text-light"></i></a>
                                 </td>
                             </tr>
                         @endforeach

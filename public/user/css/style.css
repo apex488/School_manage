@@ -1022,3 +1022,42 @@ link:focus,
 }
 
 /*# sourceMappingURL=maps/style.css.map */
+body{
+font-family: Arial;
+background:#f5f5f5;
+}
+
+.faq-section{
+width:70%;
+margin:auto;
+margin-top:200px;
+margin-bottom: 100px;
+}
+
+.faq-section h1{
+margin-bottom:30px;
+}
+
+.faq-item{
+background:white;
+margin-bottom:10px;
+border-radius:5px;
+overflow:hidden;
+}
+
+.faq-question{
+width:100%;
+padding:23px;
+text-align:left;
+border:none;
+background:#FFBC3B;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+.faq-answer{
+display:none;
+padding:15px;
+background:#fafafa;
+}

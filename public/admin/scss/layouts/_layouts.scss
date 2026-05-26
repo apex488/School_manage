@@ -2,19 +2,33 @@
 // Layout Style
 // ----------------------------------------------
 
+body {
+  font-family: $font-family-sans-serif !important;
+  background-color: #f6f8fb;
+}
+
 .page-wrapper {
   position: relative;
-
 }
 
 .body-wrapper {
   position: relative;
+  border-radius: 20px;
 
-  >.container-fluid {
+  .body-wrapper-inner{
+    min-height: calc(100vh - 110px);
+  }
+
+  .container-fluid {
     max-width: $boxed-width;
     margin: 0 auto;
     padding: $grid-gutter-width;
     transition: 0.2s ease-in;
+    padding-top: 180px;
+
+    @include media-breakpoint-down(lg){
+      padding-top: 230px;
+    }
   }
 }
 
@@ -36,7 +50,11 @@
   &[data-sidebar-position="fixed"] {
     .left-sidebar {
       position: fixed;
-      top: 0;
+      top: 65px;
+
+      @include media-breakpoint-down(lg){
+        top: 131px;
+      }
     }
   }
 
@@ -49,7 +67,7 @@
 
     .body-wrapper {
       >.container-fluid {
-        padding-top: calc(#{$header-height} + 15px);
+        padding-top: calc(#{$header-height} + 30px);
       }
     }
   }
@@ -92,14 +110,21 @@
     &[data-sidebartype="full"] {
       .left-sidebar {
         left: -$sidebar-width-full;
+        top: 0;
       }
 
       &.show-sidebar {
         .left-sidebar {
           left: 0;
+          box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
         }
       }
     }
 
+  }
+  .left-sidebar {
+    .scroll-sidebar {
+      height: calc(100vh - 240px);
+    }
   }
 }

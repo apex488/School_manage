@@ -1,65 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{asset('css/auth.css')}}">
-</head>
-<body>
+
+@extends('admin.mainsidebar')
+@section('adminbanner')
     <div class="container">
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="box">
-                    <h1>Update <br> Teachers</h1>
-                    @if (session('error'))
-                        <div class="alert alert-danger" role="alert">
-  {{session('error')}}
-</div>
-                    @endif
-                    <form action="{{route('senddata')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('updateteacher', $result->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <input type="text" placeholder="TeacherName" class="form-control mt-3" name="name" value="{{$result->name}}">
-                        @error('name')
-                        <p class="text-warning">{{$message}}</p>    
-                        @enderror
-                        <input type="number" placeholder="TeacherAge" class="form-control mt-3" name="age" value="{{$result->age}}">
-                        @error('age')
-                        <p class="text-warning">{{$message}}</p>    
-                        @enderror
-                      <select name="qualification" class="form-control mt-3">
-                        <option value="Select Qualification" selected disabled>Select Qualification</option>
-                        <option value="Secondary School Qualification">Secondary School Qualification</option>
-                        <option value="Higher Secondary Qualification">Higher Secondary Qualification</option>
-                        <option value="Diploma">Diploma</option>
-                        <option value="Bachelor’s Degree">Bachelor’s Degree</option>
-                        <option value="Master’s Degree">Master’s Degree</option>
-                      </select>
-                        @error('qualification')
-                        <p class="text-warning">{{$message}}</p>    
-                        @enderror
-                        <select name="course_id" class="form-control mt-3">
-                            <option value="Select Course" selected disabled>Select Course</option>
-                            @foreach ($data as $result)
-                                 <option value="{{$result->id}} ">{{$result->name}}</option>
-                            @endforeach
-                        </select>
-                        @error('course_id')
-                            <p class="text-warning">{{$message}}</p>
-                        @enderror
-                        <button class="btn" name="update">Update</button>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1>Update<br> Teacher</h1>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" placeholder="TeacherName" class="form-control mt-3" name="name" value="{{$result->name}}">
+                                @error('name')
+                                    <p class="text-warning">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" placeholder="TeacherAge" class="form-control mt-3" name="age" value="{{$result->age}}">
+                               @error('age')
+                                   <p class="text-warning">{{$message}}</p>
+                               @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <select name="qualification" class="form-control mt-3">
+                                   <option value="" selected disabled>Select Qualification</option>
+                                   <option value="Secondary School Qualification" {{$result->qualification== 'Secondary School Qualification' ? 'selected' :'' }}>Secondary School Qualification</option>
+                                   <option value="Higher Secondary Qualification"{{$result->qualification== 'Higher Secondary Qualification' ? 'selected' :'' }}>Higher Secondary Qualification</option>
+                                   <option value="Diploma"{{$result->qualification== 'Diploma' ? 'selected' :'' }}>Diploma</option>
+                                   <option value="Bachelor’s Degree" {{$result->qualification== 'Bachelor’s Degree' ? 'selected' :'' }}>Bachelor’s Degree</option>
+                                   <option value="Master’s Degree" {{$result->qualification== 'Master’s Degree' ? 'selected' :'' }}>Master’s Degree</option>
+                                </select>
+                                @error('qualification')
+                                    <p class="text-warning">{{$message}}</p>
+                                @enderror   
+                            </div>
+                            <div class="col-md-6">
+                                <select name="course" class="form-control mt-3">
+                                   <option value="" selected disabled>Select Course</option>
+                                      @foreach ($data as $data)
+                                         <option value="{{$data->id}}"{{$data->id == $result->course_id ? 'selected' : ''}}>{{$data->name}}</option>
+                                      @endforeach
+                                </select>
+                                @error('course')
+                                    <p class="text-warning">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <input type="file" placeholder="TeacherImage" class="form-control mt-4" name="image">
+                                <img src="{{url('storage/teacher' , $result->image)}}" alt="" width="100%" height="50px" class="mt-2">
+                                @error('image')
+                                   <p class="text-warning">{{$message}}</p>
+                               @enderror
+                            </div>
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <button class="btn">Update</button>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
                     </form>
                 </div>
             </div>
-            <div class="col-md-4"></div>
         </div>
     </div>
-    
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-</body>
-</html>
+@endsection

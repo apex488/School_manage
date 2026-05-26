@@ -17,6 +17,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
+                        <th>Image</th>
                         <th>Age</th>
                         <th>Qualification</th>
                         <th>Course Name</th>
@@ -26,11 +27,14 @@
                        <tr>
                         <td>{{$back->id}}</td>
                         <td>{{$back->name}}</td>
+                        <td>
+                            <img src="{{url('storage/teacher/' , $back->image)}}" alt="" width="60px" height="60px">
+                        </td>
                         <td>{{$back->age}}</td>
                         <td>{{$back->qualification}}</td>
-                        <td>{{$back->course_id}}</td>
+                        <td>{{$back->course->name}}</td>
                         <td>
-                            <a href="{{route('teacherdel', $back->id)}}"><i class="fa-solid fa-trash-can text-danger"></i></a>||<a href="{{route('editteacher',$back->id)}}"><i class="fa-solid fa-pen-to-square text-success"></i></a>
+                            <a class="btn btn-danger" href="{{route('teacherdel', $back->id)}}"><i class="fa-solid fa-trash-can text-light"></i></a><a class="btn btn-success" href="{{route('editteacher',$back->id)}}"><i class="fa-solid fa-pen-to-square text-light"></i></a>
                         </td>
                        </tr> 
                     @endforeach

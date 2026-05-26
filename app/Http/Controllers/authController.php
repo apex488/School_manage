@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\wellcomemail;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class authController extends Controller
 {
@@ -20,6 +22,9 @@ class authController extends Controller
         "mail"=>"required|email|unique:users,mail",
         "password"=>"required"
        ]);
+       $message="Your account has been successfully created. We are happy to have you with us.";
+       $subject="Thank you for registering on our website.";
+       Mail::to($req->mail)->send( new wellcomemail($message , $subject , $req->mail , $req->password, $req->name));
 
     
         $data=user::create($result);
